@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: customerService
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/v1/customer/**,/api/v1/auth/**
+          filters:
+            - Auth
+        - id: bookService
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/book/**,/api/v1/author/**,/api/v1/publisher/**
+          filters:
+            - Auth
+        - id: orderService
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/v1/cart/**,/api/v1/order/**
+          filters:
+            - Auth
